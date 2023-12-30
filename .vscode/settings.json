@@ -25,5 +25,6 @@
       }
     },
   ],
-  "java.test.defaultConfig": "WPIlibUnitTests"
+  "java.test.defaultConfig": "WPIlibUnitTests",
+  "java.format.settings.url": "C:\\Users\\frc63\\OneDrive\\Documents\\GitHub\\SwerveDriveTest\\eclipse-formatter.xml"
 }

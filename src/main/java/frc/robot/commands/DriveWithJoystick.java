@@ -2,27 +2,31 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
-public class DriveCommand extends CommandBase {
-    private final SwerveDrive swerveDriveSubsystem;
+public class DriveWithJoystick extends CommandBase
+{
+    private final SwerveDriveSubsystem swerveDriveSubsystem;
     private final Joystick driverController;
 
-    public DriveCommand(SwerveDrive swerveDriveSubsystem, Joystick driverController) {
+    public DriveWithJoystick(SwerveDriveSubsystem swerveDriveSubsystem, Joystick driverController, boolean isFieldRelative)
+    {
         this.swerveDriveSubsystem = swerveDriveSubsystem;
         this.driverController = driverController;
 
         // Specify subsystem dependencies (if any)
-        // addRequirements(swerveDriveSubsystem);
+        addRequirements(swerveDriveSubsystem);
     }
 
     @Override
-    public void initialize() {
+    public void initialize()
+    {
         // Perform any initialization if needed
     }
 
     @Override
-    public void execute() {
+    public void execute()
+    {
         // Get joystick inputs
         double joystickX = driverController.getX();
         double joystickY = -driverController.getY(); // Invert Y axis if needed
@@ -33,12 +37,14 @@ public class DriveCommand extends CommandBase {
     }
 
     @Override
-    public void end(boolean interrupted) {
+    public void end(boolean interrupted)
+    {
         // Perform any actions when the command ends
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean isFinished()
+    {
         // This command is intended to run continuously during teleop
         return false;
     }
