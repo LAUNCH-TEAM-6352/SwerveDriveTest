@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import java.io.IOException;
+
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -20,7 +23,13 @@ public class Robot extends TimedRobot
   @Override
   public void robotInit()
   {
-    m_robotContainer = new RobotContainer();
+    try
+    {
+      m_robotContainer = new RobotContainer();
+    } catch (IOException exception)
+    {
+      exception.printStackTrace();
+    }
   }
 
   @Override
@@ -82,7 +91,8 @@ public class Robot extends TimedRobot
     double strafe = driverController.getX();
     double rotation = driverController.getZ(); // Adjust as needed for your controller
 
-    swerveDrive.drive(forward, strafe, rotation);
+    Translation2d linearSpeed = new Translation2d(forward, strafe);
+    swerveDrive.drive(linearSpeed, rotation, Constants.isFieldRelative);
   }
 
   @Override

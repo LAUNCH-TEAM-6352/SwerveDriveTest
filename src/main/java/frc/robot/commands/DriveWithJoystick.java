@@ -1,7 +1,9 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.SwerveDriveSubsystem;
 
 public class DriveWithJoystick extends CommandBase
@@ -32,8 +34,9 @@ public class DriveWithJoystick extends CommandBase
         double joystickY = -driverController.getY(); // Invert Y axis if needed
         double joystickRotation = driverController.getTwist();
 
-        // Perform swerve drive calculations and set module speeds and angles
-        swerveDriveSubsystem.drive(joystickX, joystickY, joystickRotation);
+        // drives according to linear speed, rotational speed, and if field is relative (true for now)
+        Translation2d translationSpeed = new Translation2d(joystickX, joystickY);
+        swerveDriveSubsystem.drive(translationSpeed, joystickRotation, Constants.isFieldRelative);
     }
 
     @Override

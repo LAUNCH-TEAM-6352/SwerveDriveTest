@@ -15,12 +15,18 @@ public class SwerveDriveSubsystem extends SubsystemBase
 {
     private SwerveDrive swerveDrive;
 
-    public SwerveDriveSubsystem() throws IOException
+    public SwerveDriveSubsystem() 
     {
-        double maximumSpeed = Units.feetToMeters(4.5);
-        File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
-        swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(maximumSpeed);
-
+        try
+        {
+            double maximumSpeed = Units.feetToMeters(4.5);
+            File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
+            swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(maximumSpeed);
+        }
+        catch (IOException exception)
+        {
+            exception.printStackTrace();
+        }
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative)
@@ -30,23 +36,13 @@ public class SwerveDriveSubsystem extends SubsystemBase
 
     }
 
-    /**
-     * Drive the robot given a chassis field oriented velocity.
-     *
-     * @param velocity
-     *            Velocity according to the field.
-     */
+    // Drive the robot given a chassis field oriented velocity.
     public void driveFieldOriented(ChassisSpeeds velocity)
     {
         swerveDrive.driveFieldOriented(velocity);
     }
 
-    /**
-     * Drive according to the chassis robot oriented velocity.
-     *
-     * @param velocity
-     *            Robot oriented {@link ChassisSpeeds}
-     */
+    // Drive according to the chassis robot oriented velocity.
     public void drive(ChassisSpeeds velocity)
     {
         swerveDrive.drive(velocity);

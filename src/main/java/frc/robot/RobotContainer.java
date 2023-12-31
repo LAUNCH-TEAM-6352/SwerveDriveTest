@@ -23,7 +23,8 @@ public class RobotContainer
   public RobotContainer() throws IOException
   {
     // Configure default command for the swerve drive subsystem
-    swerveDriveSubsystem.setDefaultCommand(new DriveWithJoystick(swerveDriveSubsystem, driverController));
+    swerveDriveSubsystem.setDefaultCommand(new DriveWithJoystick(swerveDriveSubsystem, driverController,
+                                            Constants.isFieldRelative));
 
     configureBindings();
 
