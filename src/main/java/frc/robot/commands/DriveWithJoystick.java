@@ -34,9 +34,19 @@ public class DriveWithJoystick extends CommandBase
         double joystickY = -driverController.getY(); // Invert Y axis if needed
         double joystickRotation = driverController.getTwist();
 
-        // drives according to linear speed, rotational speed, and if field is relative (true for now)
+        // Apply deadband and sensitivity adjustments
+        joystickX = applyDeadbandAndSensitivity(joystickX);
+        joystickY = applyDeadbandAndSensitivity(joystickY);
+        joystickRotation = applyDeadbandAndSensitivity(joystickRotation);
+
+        // Drives according to linear speed, rotational speed, and if field is relative (true for now)
         Translation2d translationSpeed = new Translation2d(joystickX, joystickY);
         swerveDriveSubsystem.drive(translationSpeed, joystickRotation, Constants.isFieldRelative);
+    }
+
+    private double applyDeadbandAndSensitivity(double input) {
+        // Example: return (Math.abs(input) < 0.1) ? 0.0 : sensitivity * Math.pow(input, 3);
+        return input;
     }
 
     @Override

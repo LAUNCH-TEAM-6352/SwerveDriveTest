@@ -17,6 +17,7 @@ public class SwerveDriveSubsystem extends SubsystemBase
 
     public SwerveDriveSubsystem() 
     {
+        // Swerve drive initiation according to YAGSL
         try
         {
             double maximumSpeed = Units.feetToMeters(4.5);
